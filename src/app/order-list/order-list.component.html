@@ -1,0 +1,26 @@
+<!-- <p>order-list works!</p> -->
+
+<form [formGroup]="prizzaOrdersForm">
+    <table>
+        <caption>Pizza Orders</caption>
+        <tr>
+            <th>Customer name</th>
+            <th>Item count</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Buttons</th>
+        </tr>
+        <!-- *ngFor="let order of orderRows.controls; let index as idx" -->
+        <tr>
+            <td>Julie</td>
+            <td>3</td>
+            <td>300</td>
+            <td>Order Received</td>
+            <td>
+                <button type="button" class="btn btn-primary">Change Status</button>
+                <button type="button" class="btn btn-link">View order details</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
