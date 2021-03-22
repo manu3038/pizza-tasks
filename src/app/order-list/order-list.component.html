@@ -11,7 +11,7 @@
         <th>Item count</th>
         <th>Amount</th>
         <th>Status</th>
-        <th>Buttons</th>
+        <th></th>
       </thead>
       <!-- *ngFor="let order of orderRows.controls; let index as idx" -->
       <tbody>
@@ -26,8 +26,8 @@
           <td *ngIf="item.status == 'p'">Preparing</td>
           <td *ngIf="item.status == 'r'">Ready to serve</td>
           <td>
-            <button type="button" class="btn btn-primary">Change Status</button>
-            <button type="button" class="btn btn-link">
+            <button *ngIf="item.status != 'r'" type="button" class="btn btn-primary" (click)="changeStatus(index)" >Change Status</button>
+            <button type="button" class="btn btn-link" (click) = "routeToEditPage(index)">
               View order details
             </button>
           </td>
@@ -36,3 +36,4 @@
     </table>
   </div>
 </form>
+<router-outlet></router-outlet>

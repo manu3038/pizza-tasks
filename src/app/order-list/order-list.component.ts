@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrderListService } from './order-list.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { OrderListService } from './order-list.service';
   styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent implements OnInit {
-  constructor(private fb: FormBuilder, private service: OrderListService) {}
-  prizzaOrdersForm: FormGroup
+  constructor(
+    private fb: FormBuilder,
+    private service: OrderListService,
+    public router: Router
+  ) {}
+  prizzaOrdersForm: FormGroup;
   orderRows: FormArray;
   statusList = [
     { status: 'Order Received', value: 'o' },
@@ -17,8 +22,8 @@ export class OrderListComponent implements OnInit {
     { status: 'Ready to serve', value: 'r' },
   ];
   ngOnInit() {
-    this.prizzaOrdersForm  = this.fb.group({
-      orderRows: this.fb.array([])
+    this.prizzaOrdersForm = this.fb.group({
+      orderRows: this.fb.array([]),
     });
     this.orderRows = this.prizzaOrdersForm.get('orderRows') as FormArray;
     const patchArray = [];
@@ -34,7 +39,7 @@ export class OrderListComponent implements OnInit {
     this.orderRows.patchValue(patchArray);
     console.table(this.orderRows.value);
   }
-  addRow(){
+  addRow() {
     this.orderRows.push(this.addOrder());
   }
 
@@ -45,5 +50,21 @@ export class OrderListComponent implements OnInit {
       amt: '',
       status: '',
     });
+  }
+
+  routeToEditPage(id: number) {
+    this.router.navigate(['edit/' + id]);
+  }
+
+  changeStatus(idx: number) {
+    const row = this.orderRows.controls[idx] as FormGroup;
+    const currStatus = row.get('status').value;
+    if (currStatus != undefined && currStatus != '') {
+      if(currStatus == "o"){
+        row.get('status').setValue("p");
+      } else if(currStatus == "p"){
+        row.get('status').setValue("r");
+      }
+    }
   }
 }
