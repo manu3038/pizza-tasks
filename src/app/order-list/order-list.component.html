@@ -1,26 +1,38 @@
 <!-- <p>order-list works!</p> -->
 
 <form [formGroup]="prizzaOrdersForm">
+  <div formArrayName="orderRows">
     <table>
-        <caption>Pizza Orders</caption>
-        <tr>
-            <th>Customer name</th>
-            <th>Item count</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Buttons</th>
+      <caption>
+        Pizza Orders
+      </caption>
+      <thead>
+        <th>Customer name</th>
+        <th>Item count</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Buttons</th>
+      </thead>
+      <!-- *ngFor="let order of orderRows.controls; let index as idx" -->
+      <tbody>
+        <tr
+          *ngFor="let item of orderRows.value; let index = index"
+          [formGroupName]="index"
+        >
+          <td>{{ item.custName }}</td>
+          <td>{{ item.noOfItems }}</td>
+          <td>{{ item.amt }}</td>
+          <td *ngIf="item.status == 'o'">Order Received</td>
+          <td *ngIf="item.status == 'p'">Preparing</td>
+          <td *ngIf="item.status == 'r'">Ready to serve</td>
+          <td>
+            <button type="button" class="btn btn-primary">Change Status</button>
+            <button type="button" class="btn btn-link">
+              View order details
+            </button>
+          </td>
         </tr>
-        <!-- *ngFor="let order of orderRows.controls; let index as idx" -->
-        <tr>
-            <td>Julie</td>
-            <td>3</td>
-            <td>300</td>
-            <td>Order Received</td>
-            <td>
-                <button type="button" class="btn btn-primary">Change Status</button>
-                <button type="button" class="btn btn-link">View order details</button>
-            </td>
-        </tr>
+      </tbody>
     </table>
-
+  </div>
 </form>

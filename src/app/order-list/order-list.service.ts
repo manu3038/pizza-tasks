@@ -7,77 +7,77 @@ export class OrderListService {
   ordersArray = [
     {
       custName: "julie",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "2",
+      amt: "222",
+      status: "o"
     },
     {
       custName: "robert",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "12",
+      amt: "333",
+      status: "o"
     },
     {
       custName: "mark",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "3",
+      amt: "23424",
+      status: "p"
     },
 
     {
       custName: "john",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "4",
+      amt: "2432",
+      status: "p"
     },
     {
       custName: "kenny",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "8",
+      amt: "6472",
+      status: "r"
     },
     {
       custName: "khan",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "4",
+      amt: "9356",
+      status: "r"
     },
     {
       custName: "ajay",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "3",
+      amt: "9654",
+      status: "o"
     },
     {
       custName: "manu",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "7",
+      amt: "7235",
+      status: "p"
     },
     {
       custName: "siri",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "8",
+      amt: "3424",
+      status: "p"
     },
 
     {
       custName: "pablo",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "9",
+      amt: "23633",
+      status: "r"
     },
     {
       custName: "walter",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "5",
+      amt: "2674",
+      status: "r"
     },
     {
       custName: "griffin",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      noOfItems: "2",
+      amt: "2355",
+      status: "o"
     }
   ];
   constructor() { }

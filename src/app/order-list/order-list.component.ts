@@ -1,37 +1,49 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
-import { OrderListService } from "./order-list.service";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { OrderListService } from './order-list.service';
 
 @Component({
-  selector: "app-order-list",
-  templateUrl: "./order-list.component.html",
-  styleUrls: ["./order-list.component.css"]
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent implements OnInit {
-  constructor(private fb: FormBuilder, private service: OrderListService) { }
-  prizzaOrdersForm: FormGroup = this.fb.group({
-    orderRows: this.fb.array([])
-  });
-  orderRows: FormArray = this.prizzaOrdersForm.get("orderRows").value;
+  constructor(private fb: FormBuilder, private service: OrderListService) {}
+  prizzaOrdersForm: FormGroup
+  orderRows: FormArray;
   statusList = [
-    { status: "Order Received", value: "o" },
-    { status: "Preparing", value: "p" },
-    { status: "Ready to serve", value: "r" }];
+    { status: 'Order Received', value: 'o' },
+    { status: 'Preparing', value: 'p' },
+    { status: 'Ready to serve', value: 'r' },
+  ];
   ngOnInit() {
-    this.service.ordersArray.forEach(i => {
-      this.orderRows.push(this.addOrder());
+    this.prizzaOrdersForm  = this.fb.group({
+      orderRows: this.fb.array([])
     });
-    this.service.ordersArray.map((e, i) => {
-      (this.orderRows[i] as FormGroup).controls.custName.setValue(e.custName);
+    this.orderRows = this.prizzaOrdersForm.get('orderRows') as FormArray;
+    const patchArray = [];
+    this.service.ordersArray.forEach((i) => {
+      patchArray.push({
+        custName: i.custName,
+        noOfItems: i.noOfItems,
+        amt: i.amt,
+        status: i.status,
+      });
+      this.addRow();
     });
-    console.log((this.orderRows[0] as FormGroup).controls.custName.value);
+    this.orderRows.patchValue(patchArray);
+    console.table(this.orderRows.value);
   }
+  addRow(){
+    this.orderRows.push(this.addOrder());
+  }
+
   addOrder(): FormGroup {
     return this.fb.group({
-      custName: "",
-      noOfItems: "",
-      amt: "",
-      status: ""
+      custName: '',
+      noOfItems: '',
+      amt: '',
+      status: '',
     });
   }
 }
